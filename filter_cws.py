@@ -35,10 +35,30 @@ if __name__ == "__main__":
 		formatter_class = argparse.ArgumentDefaultsHelpFormatter,
 		epilog = "Example: %(prog)s calc.cws",
 		)
-	parser.add_argument('filename', type=str)
-	parser.add_argument('--to-xml', default=False, action='store_true' )
-	parser.add_argument('--to-cws', default=False, action='store_true' )
-	parser.add_argument('--force', '-f', default=False, action='store_true')
+	parser.add_argument(
+		'filename',
+		type=str,
+		help="The path to the file to handle",
+		)
+	parser.add_argument(
+		'--to-xml',
+		default=False,
+		action='store_true',
+		help="Convert the given file to a result-less XML",
+		)
+	parser.add_argument(
+		'--to-cws',
+		default=False,
+		action='store_true',
+		help="Convert the given XML file to a CWS file",
+		)
+	parser.add_argument(
+		'--force',
+		'-f',
+		default=False,
+		action='store_true',
+		help="Use with --to-cws; if a file with the same name as the output exists, overwrite it",
+		)
 	
 	args = parser.parse_args()
 	
