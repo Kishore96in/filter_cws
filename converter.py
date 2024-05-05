@@ -34,15 +34,16 @@ if __name__ == "__main__":
 		epilog = "Example: %(prog)s calc.cws",
 		)
 	parser.add_argument('filename', type=str)
-	parser.add_argument('--to-xml', default=True, action='store_true' )
+	parser.add_argument('--to-xml', default=False, action='store_true' )
 	parser.add_argument('--to-cws', default=False, action='store_true' )
 	
 	args = parser.parse_args()
 	
 	if args.to_xml and args.to_cws:
 		raise ValueError("Only one of --to-xml and --to-cws should be specified")
-	
-	if args.to_xml:
+	elif args.to_xml:
 		filter_results(args.filename, "out.cws.xml")
-	if args.to_cws:
+	elif args.to_cws:
 		make_worksheet(args.filename, "output_1.cws")
+	else:
+		raise ValueError("Specify one of --to-xml and --to-cws")
