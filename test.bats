@@ -23,8 +23,10 @@ function md5cmp {
 @test "xml to cws (output not tested)" {
 	rm -f tests/output_1.cws #in case it exists from a previous run
 	python filter_cws.py --to-cws tests/output_1.cws.xml
+	
 	#NOTE: md5 won't work since even the file modification time will change the md5 of the zip file.
 	#md5cmp output_1.cws tests/output_1.cws
+	test -e tests/output_1.cws
 	
 	#clean up
 	rm tests/output_1.cws
@@ -35,6 +37,8 @@ function md5cmp {
 	cp tests/output_1.cws.xml tests/output_1_.cws.xml
 	not python filter_cws.py --to-cws tests/output_1_.cws.xml
 	
+	test -e tests/output_1_.cws
+	
 	#clean up
 	rm tests/output_1_.cws
 }
@@ -44,6 +48,8 @@ function md5cmp {
 	touch tests/output_1_.cws
 	cp tests/output_1.cws.xml tests/output_1_.cws.xml
 	python filter_cws.py --to-cws tests/output_1_.cws.xml --force
+	
+	test -e tests/output_1_.cws
 	
 	#clean up
 	rm tests/output_1_.cws
