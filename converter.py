@@ -21,5 +21,10 @@ def filter_results(infile, outfile):
 				expr.remove(result)
 	
 	etree.write(outfile)
+
+def make_worksheet(infile, outfile):
+	with zipfile.ZipFile(outfile, 'w') as z:
+		z.write(infile, arcname="content.xml")
+
 if __name__ == "__main__":
 	filter_results("tests/input_1.cws", "out.cws.xml")
