@@ -38,6 +38,7 @@ if __name__ == "__main__":
 	parser.add_argument('filename', type=str)
 	parser.add_argument('--to-xml', default=False, action='store_true' )
 	parser.add_argument('--to-cws', default=False, action='store_true' )
+	parser.add_argument('--force', '-f', default=False, action='store_true')
 	
 	args = parser.parse_args()
 	
@@ -46,6 +47,13 @@ if __name__ == "__main__":
 	elif args.to_xml:
 		filter_results(args.filename, f"{args.filename}.xml")
 	elif args.to_cws:
-		make_worksheet(args.filename, "output_1.cws")
+		outfile = args.filename.replace(".cws.xml", ".cws")
+		if outfile == args.filename:
+			raise RuntimeError(f"Could not generate filename for output file; input: {args.filename}; output: {outfile}")
+		
+		if args.force or not os.path.isfile(outfile):
+			make_worksheet(args.filename, "output_1.cws")
+		elif os.path.isfile(outfile):
+			raise FileExistsError("Use the --force option to overwriting an existing file.")
 	else:
 		raise ValueError("Specify one of --to-xml and --to-cws")
