@@ -16,6 +16,7 @@ def filter_results(infile, outfile):
 	for expr in worksheet.iter():
 		if expr.tag == "Expression":
 			results = expr.findall(".//Result")
+			results.extend(expr.findall(".//Error"))
 			for result in results:
 				expr.remove(result)
 	
