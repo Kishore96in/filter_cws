@@ -2,6 +2,7 @@ import defusedxml.ElementTree
 import tempfile
 import zipfile
 import os
+import argparse
 
 def filter_results(infile, outfile):
 	tmpdir = tempfile.mkdtemp()
@@ -27,4 +28,21 @@ def make_worksheet(infile, outfile):
 		z.write(infile, arcname="content.xml")
 
 if __name__ == "__main__":
-	filter_results("tests/input_1.cws", "out.cws.xml")
+	parser = argparse.ArgumentParser(
+		description = "Given a Cantor worksheet, create an XML file with the results stripped (or convert such a file to an Cantor worksheet)",
+		formatter_class = argparse.ArgumentDefaultsHelpFormatter,
+		epilog = "Example: %(prog)s calc.cws",
+		)
+	parser.add_argument('filename', type=str)
+	parser.add_argument('--to-xml', default=True, action='store_true' )
+	parser.add_argument('--to-cws', default=False, action='store_true' )
+	
+	args = parser.parse_args()
+	
+	if args.to_xml and args.to_cws:
+		raise ValueError("Only one of --to-xml and --to-cws should be specified")
+	
+	if args.to_xml:
+		filter_results(args.filename, "out.cws.xml")
+	if args.to_cws:
+		make_worksheet(args.filename, "output_1.cws")
