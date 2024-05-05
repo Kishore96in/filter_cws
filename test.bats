@@ -7,6 +7,11 @@ function md5cmp {
 	python filter_cws.py --help
 }
 
+@test "args clash" {
+	#Use `not` to check that it fails.
+	not python filter_cws.py --to-xml --to-cws tests/input_1.cws
+}
+
 @test "cws to xml" {
 	python filter_cws.py --to-xml tests/input_1.cws
 	md5cmp out.cws.xml tests/output_1.cws.xml
