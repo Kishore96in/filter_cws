@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import defusedxml.ElementTree
 import tempfile
 import zipfile
