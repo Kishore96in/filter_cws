@@ -14,7 +14,7 @@ function md5cmp {
 
 @test "cws to xml" {
 	python filter_cws.py --to-xml tests/input_1.cws
-	md5cmp out.cws.xml tests/output_1.cws.xml
+	md5cmp tests/input_1.cws.xml tests/output_1.cws.xml
 }
 
 @test "xml to cws (output not tested)" {

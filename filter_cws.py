@@ -44,7 +44,7 @@ if __name__ == "__main__":
 	if args.to_xml and args.to_cws:
 		raise ValueError("Only one of --to-xml and --to-cws should be specified")
 	elif args.to_xml:
-		filter_results(args.filename, "out.cws.xml")
+		filter_results(args.filename, f"{args.filename}.xml")
 	elif args.to_cws:
 		make_worksheet(args.filename, "output_1.cws")
 	else:
