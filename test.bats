@@ -11,3 +11,9 @@ function md5cmp {
 	python converter.py --to-xml tests/input_1.cws
 	md5cmp out.cws.xml tests/output_1.cws.xml
 }
+
+@test "xml to cws (output not tested)" {
+	python converter.py --to-cws tests/output_1.cws.xml
+	#NOTE: md5 won't work since even the file modification time will change the md5 of the zip file.
+ 	#md5cmp output_1.cws tests/output_1.cws
+}
