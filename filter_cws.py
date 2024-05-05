@@ -52,7 +52,7 @@ if __name__ == "__main__":
 			raise RuntimeError(f"Could not generate filename for output file; input: {args.filename}; output: {outfile}")
 		
 		if args.force or not os.path.isfile(outfile):
-			make_worksheet(args.filename, "output_1.cws")
+			make_worksheet(args.filename, outfile)
 		elif os.path.isfile(outfile):
 			raise FileExistsError("Use the --force option to overwriting an existing file.")
 	else:
