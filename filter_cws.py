@@ -25,11 +25,17 @@ def filter_results(infile, outfile):
 	
 	worksheet = defusedxml.ElementTree.fromstring(data)
 	for expr in worksheet.iter():
+		results = []
+		
 		if expr.tag == "Expression":
-			results = expr.findall(".//Result")
+			results.extend(expr.findall(".//Result"))
 			results.extend(expr.findall(".//Error"))
-			for result in results:
-				expr.remove(result)
+		elif expr.tag == "Markdown":
+			results.extend(expr.findall(".//HTML"))
+			results.extend(expr.findall(".//EmbeddedMath"))
+		
+		for result in results:
+			expr.remove(result)
 	
 	with open(outfile, 'w') as f:
 		f.write(defusedxml.ElementTree.tostring(
