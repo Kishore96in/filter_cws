@@ -20,6 +20,14 @@ function md5cmp {
 	rm tests/input_1.cws.xml
 }
 
+@test "cws to xml (with a Markdown cell)" {
+	python filter_cws.py --to-xml tests/input_2.cws
+	md5cmp tests/input_2.cws.xml tests/output_2.cws.xml
+	
+	#clean up
+	rm tests/input_2.cws.xml
+}
+
 @test "xml to cws (output not tested)" {
 	rm -f tests/output_1.cws #in case it exists from a previous run
 	python filter_cws.py --to-cws tests/output_1.cws.xml

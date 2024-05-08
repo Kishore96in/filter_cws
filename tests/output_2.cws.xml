@@ -1,0 +1,32 @@
+<Worksheet backend="Python">
+ <Expression>
+  <Command>import numpy as np
+import matplotlib.pyplot as plt</Command>
+ </Expression>
+ <Markdown rendered="1">
+  <Plain># Markdown heading
+
+Markdown text
+
+Math: $M_L$</Plain>
+  </Markdown>
+ <Expression>
+  <Command>a = 2
+b = a**2</Command>
+ </Expression>
+ <Expression>
+  <Command>b</Command>
+  </Expression>
+ <Expression>
+  <Command>c = np.sqrt(b)</Command>
+ </Expression>
+ <Expression>
+  <Command>c</Command>
+  </Expression>
+ <Expression>
+  <Command>raise RuntimeError</Command>
+  </Expression>
+ <Expression>
+  <Command />
+ </Expression>
+</Worksheet>
