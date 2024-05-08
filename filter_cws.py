@@ -6,16 +6,24 @@ import zipfile
 import os
 import argparse
 
+invalid_characters = [
+	#List of characters that are not allowed in an XML file, but which Cantor's files contain.
+	chr(0x6),
+	]
+
 def filter_results(infile, outfile):
 	tmpdir = tempfile.mkdtemp()
 	
 	with zipfile.ZipFile(infile, 'r') as z:
 		z.extractall(tmpdir)
 	
-	fname = os.path.join(tmpdir, "content.xml")
-	etree = defusedxml.ElementTree.parse(fname)
+	with open(os.path.join(tmpdir, "content.xml")) as f:
+		data = f.read()
 	
-	worksheet = etree.getroot()
+	for char in invalid_characters:
+		data = data.replace(char, chr(0xFFFD))
+	
+	worksheet = defusedxml.ElementTree.fromstring(data)
 	for expr in worksheet.iter():
 		if expr.tag == "Expression":
 			results = expr.findall(".//Result")
@@ -23,7 +31,11 @@ def filter_results(infile, outfile):
 			for result in results:
 				expr.remove(result)
 	
-	etree.write(outfile)
+	with open(outfile, 'w') as f:
+		f.write(defusedxml.ElementTree.tostring(
+			worksheet,
+			encoding='unicode',
+			))
 
 def make_worksheet(infile, outfile):
 	with zipfile.ZipFile(outfile, 'w') as z:
