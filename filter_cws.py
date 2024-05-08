@@ -8,7 +8,7 @@ import argparse
 
 invalid_characters = [
 	#List of characters that are not allowed in an XML file, but which Cantor's files contain.
-	chr(0x6),
+	chr(0x6), #Cantor seems to use this to mark EmbeddedMath in Markdown cells
 	]
 
 def filter_results(infile, outfile):
