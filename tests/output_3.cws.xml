@@ -1,0 +1,26 @@
+<Worksheet backend="Python">
+ <Expression>
+  <Command>import numpy as np
+import matplotlib.pyplot as plt</Command>
+ </Expression>
+ <Expression>
+  <Command>a = 2
+b = a**2</Command>
+ </Expression>
+ <Expression>
+  <Command>b</Command>
+  </Expression>
+ <Expression>
+  <Command>raise RuntimeError</Command>
+  </Expression>
+ <Expression>
+  <Command>c = np.sqrt(b)</Command>
+ </Expression>
+ <Expression>
+  <Command>c</Command>
+  </Expression>
+ <Latex>This is a Latex cell. $a_1 + b_1 = 3$</Latex>
+ <Expression>
+  <Command />
+ </Expression>
+</Worksheet>
