@@ -33,6 +33,9 @@ def filter_results(infile, outfile):
 		elif expr.tag == "Markdown":
 			results.extend(expr.findall(".//HTML"))
 			results.extend(expr.findall(".//EmbeddedMath"))
+		elif expr.tag == "Latex":
+			expr.attrib.pop('filename')
+			expr.attrib.pop('image')
 		
 		for result in results:
 			expr.remove(result)
